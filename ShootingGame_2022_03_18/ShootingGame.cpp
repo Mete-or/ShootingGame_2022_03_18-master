@@ -44,7 +44,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     Random::Init();  //랜덤초기화
 
     //배경, 플레이어 등...게임객체 로딩
-    //ObjectManager::Instantiate(new GameBG(0, 0));
+    ObjectManager::Instantiate(new GameBG(0, 0));
     ObjectManager::Instantiate(new Player(WIDTH/2 - 34, HEIGHT-150));
     //****************애니메이션 클래스 테스트 하기****************************
     //ObjectManager::Instantiate(new Animation("", "", true, 200, 100));
