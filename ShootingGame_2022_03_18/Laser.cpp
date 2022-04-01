@@ -18,3 +18,8 @@ void Laser::Update()
 {
 	Translate(0, -speed * Time::deltaTime);
 }
+
+
+
+
+ 

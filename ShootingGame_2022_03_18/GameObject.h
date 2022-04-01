@@ -18,6 +18,9 @@ private:
 	//2D 박스 콜라이더(충돌체)(BoxCollider 2D) 추가하기
 	BoxCollider2D collider = BoxCollider2D();
 
+	//객체 삭제 표시 변수
+	bool isDead;
+
 public:
 	//생성자, 소멸자//
 	GameObject(string tag, string name, bool active, float px, float py);
@@ -27,6 +30,7 @@ public:
 	string GetTag();
 	string GetName();
 	bool   GetActive();
+	bool GetDead();
 
 	float GetPx();
 	float GetPy();
@@ -37,6 +41,7 @@ public:
 
 	void SetPx(float px);
 	void SetPy(float py);
+	void SetDead(bool Dead);
 
 	//기본 가상함수//
 	virtual void Start()  = 0;

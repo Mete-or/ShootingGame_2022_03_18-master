@@ -11,6 +11,8 @@ GameObject::GameObject(string tag, string name, bool active, float px, float py)
 	this->px = px;
 	this->py = py;
 
+	this->isDead = false;
+
 }
 
 GameObject::~GameObject()
@@ -41,7 +43,10 @@ float GameObject::GetPy()
 {
 	return py;
 }
-
+bool GameObject::GetDead()
+{
+	return isDead;
+}
 void GameObject::SetTag(string tag)
 {
 	this->tag = tag;
@@ -77,6 +82,10 @@ void GameObject::SetPy(float py)
 	this->py = py;
 
 	collider.Translate(0, dy);
+}
+void GameObject::SetDead(bool dead)
+{
+	this->isDead = true;
 }
 
 void GameObject::Translate(float x, float y)

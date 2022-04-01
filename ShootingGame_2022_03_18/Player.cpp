@@ -188,6 +188,5 @@ void Player::Fire()
 void Player::OnTriggerStay2D(GameObject* other)
 {
 	string tag = other->GetTag();
-
 	
 }

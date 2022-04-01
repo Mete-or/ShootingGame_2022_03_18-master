@@ -53,8 +53,13 @@ void ObjectManager::CheckCollision()
 				if (y0 < b1 && y1 > b0 && x1 > a0 && x0 < a1)
 				{
 					//충돌 이벤트
-					obji->OnTriggerStay2D(obji);
-					objj->OnTriggerStay2D(objj);
+					obji->OnTriggerStay2D(objj);
+					objj->OnTriggerStay2D(obji);
+
+					//위 객체가 모두 사용 완료 이후에 삭제///
+
+					}
+
 				}
 				
 
@@ -78,6 +83,9 @@ void ObjectManager::Draw()
 
 void ObjectManager::Destroy(GameObject* obj)
 {
+	obj->SetDead(true);
+
+	/*
 	for (int i = 0; i < gameObjects.size(); i++)
 	{
 		if (gameObjects[i] == obj)
@@ -91,6 +99,7 @@ void ObjectManager::Destroy(GameObject* obj)
 			break;
 		}
 	}
+	*/
 }
 
 void ObjectManager::Clear()
