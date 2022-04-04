@@ -25,5 +25,9 @@ public:
 
 	//게임 목록 모두 삭제하기 함수
 	static void Clear();
+
+	//삭제 대상으로 표시된 객체를 삭제하는 함수
+	static void ClearDeadObjects();
+	
 };
 

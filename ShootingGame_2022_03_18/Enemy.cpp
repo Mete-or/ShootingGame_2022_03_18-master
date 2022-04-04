@@ -19,21 +19,27 @@ void Enemy::Start()
 {
 
 	//피해없는 적기 이미지								배열의 인덱스(AnimID)
-	for (int i = 0; i < 2; i++)
-	{
-		AddSprite("Asset/적기.bmp", 200 * i + 1, 281, 190, 137, 0);
-	}
-	//중간피해 적기 이미지들
-	for (int i = 0; i < 4; i++)
-	{
-		AddSprite("Asset/적기.bmp", 200 * i + 1, 141, 190, 137, 1);
 
-	}
+		for (int i = 0; i < 2; i++)
+		{
+			AddSprite("Asset/적기.bmp", 200 * i + 1, 281, 190, 137, 0);
+		}
+	
+	//중간피해 적기 이미지들
+
+		for (int i = 0; i < 4; i++)
+		{
+			AddSprite("Asset/적기.bmp", 200 * i + 1, 141, 190, 137, 1);
+
+		}
+	
 	//최대피해 적기 이미지들
-	for (int i = 0; i < 4; i++)
-	{
-		AddSprite("Asset/적기.bmp", 200 * i + 1, 1, 190, 137, 2);
-	}
+
+		for (int i = 0; i < 4; i++)
+		{
+			AddSprite("Asset/적기.bmp", 200 * i + 1, 1, 190, 137, 2);
+		}
+	
 
 	//충돌체 추가하기
 	AddBoxCollider2D(0, 0, 190, 137);
@@ -118,9 +124,32 @@ void Enemy::OnTriggerStay2D(GameObject* other)
 		float px = other->GetPx();
 		float py = other->GetPy();
 
-		Instantiate(new LaserExp(px, py));
+		Instantiate(new LaserExp(px-14, py));
 
 		Destroy(other); // 데이터 삭제하기
+
+		if (80 <= hp && hp <= 100)
+		{
+			Play(0);
+		}
+		else if (50 <= hp && hp < 80)
+		{
+			Play(1);
+		}
+		else if (0 <= hp && hp < 50)
+		{
+			Play(2);
+		}
+		else if (hp <= 0)
+		{
+			//적기 폭발
+			px = this->GetPx();
+			py = this->GetPy();
+			Instantiate(new EnemyExp(px-18,py-90));
+			//적기 제거
+			Destroy(this);
+		}
+
 
 	}
 	else if (tag == "플레이어")

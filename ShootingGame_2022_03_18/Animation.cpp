@@ -16,7 +16,17 @@ void Animation::AddSprite(const char* fileName, int x, int y, int width, int hei
 }
 
 Animation::~Animation()
-{}
+{
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < sprite[i].size(); j++)
+		{
+			delete[] sprite[i][j].rgb;
+		}
+	}
+	
+	printf("애니메이션 소멸자 =--\n");
+}
 
 //애니메이션 기능 테스트 추가 함수
 /*
@@ -79,7 +89,7 @@ void Animation::Draw()
 			index = 0;
 
 			//애니메이션 완료 이벤트
-			Animation::OnAnimationEnd();
+			OnAnimationEnd();
 		}
 
 		animTimer = 0;

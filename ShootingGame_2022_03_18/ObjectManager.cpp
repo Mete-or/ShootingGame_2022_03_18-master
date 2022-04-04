@@ -55,11 +55,7 @@ void ObjectManager::CheckCollision()
 					//충돌 이벤트
 					obji->OnTriggerStay2D(objj);
 					objj->OnTriggerStay2D(obji);
-
-					//위 객체가 모두 사용 완료 이후에 삭제///
-
-					}
-
+					
 				}
 				
 
@@ -70,6 +66,8 @@ void ObjectManager::CheckCollision()
 		}
 		
 	}
+
+
 }
 
 void ObjectManager::Draw()
@@ -81,8 +79,29 @@ void ObjectManager::Draw()
 	}
 }
 
+void ObjectManager::ClearDeadObjects()
+{
+	for (int i = 0; i < gameObjects.size(); i++)
+	{
+		GameObject* obj = gameObjects[i];
+
+		if (obj->GetDead() == true)
+		{
+			gameObjects.erase(gameObjects.begin() + i);
+			delete obj;
+
+			i--;
+
+			cout << "삭제" << endl;
+
+			
+		}
+	}
+}
+
 void ObjectManager::Destroy(GameObject* obj)
 {
+
 	obj->SetDead(true);
 
 	/*

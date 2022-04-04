@@ -49,6 +49,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     //****************애니메이션 클래스 테스트 하기****************************
     //ObjectManager::Instantiate(new Animation("", "", true, 200, 100));
     ObjectManager::Instantiate(new Enemy(150,-200));
+    
 
 
    
@@ -83,6 +84,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
          //객체 충돌검사
          ObjectManager::CheckCollision();
+
+         //위 객체가 모두 사용 완료 이후에 삭제
+         ObjectManager::ClearDeadObjects();
+
 
          //그리기
          ObjectManager::Draw();
