@@ -42,13 +42,15 @@ void Enemy::Start()
 	
 
 	//충돌체 추가하기
-	AddBoxCollider2D(0, 0, 190, 137);
-		
+	AddBoxCollider2D(0, 80, 190, 25); //가운데 날개
+	AddBoxCollider2D(65, 10, 62, 16); //꼬리 날개
+	AddBoxCollider2D(88, 26,14, 112); //가운데 몸통
+
 }
 void Enemy::Update()
 {
 	Move();
-	//Fire();
+	Fire();
 
 } 
 

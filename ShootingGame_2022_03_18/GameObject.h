@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <vector>
 #include "BoxCollider2D.h"
 
 using namespace std;
@@ -16,7 +17,7 @@ private:
 	float px, py;
 
 	//2D 박스 콜라이더(충돌체)(BoxCollider 2D) 추가하기
-	BoxCollider2D collider = BoxCollider2D();
+	vector<BoxCollider2D> collider;
 
 	//객체 삭제 표시 변수
 	bool isDead;
@@ -63,7 +64,7 @@ public:
 	
 
 	//충돌체 게터//
-	BoxCollider2D GetCollider();
+	vector<BoxCollider2D> GetCollider();
 	
 
 	//충돌 정보 처리함수//

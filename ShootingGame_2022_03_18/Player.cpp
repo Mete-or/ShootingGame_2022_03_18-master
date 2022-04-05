@@ -31,7 +31,8 @@ void Player::Start()
 	//Bitmap::ReadBMP("Asset/팬텀이동2.bmp", 192, 0, 62, 80, &sprite);
 
 	//충돌제 추가하기//
-	AddBoxCollider2D(0,0, 62, 80);
+	AddBoxCollider2D(26,9, 9, 61);
+	AddBoxCollider2D(9, 37, 44, 14);
 
 }
 
@@ -188,5 +189,32 @@ void Player::Fire()
 void Player::OnTriggerStay2D(GameObject* other)
 {
 	string tag = other->GetTag();
+
+	if (tag == "적기총알")
+	{
+		hp = hp - 10; //적기에 피해 데미지 적용하기
+		printf("플레이어 체력 %f\n", hp);
+
+		//레이저 폭발효과
+		float px = other->GetPx();
+		float py = other->GetPy();
+
+		Instantiate(new BulletExp(px - 14, py));
+
+		Destroy(other); // 데이터 삭제하기
+
+
+		if (hp <= 0)
+		{
+			//플레이어 폭발
+			px = this->GetPx();
+			py = this->GetPy();
+			Instantiate(new BulletExp(px - 18, py - 90));
+			//적기 제거
+			Destroy(this);
+		}
+
+
+	}
 	
 }

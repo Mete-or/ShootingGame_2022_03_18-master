@@ -1,6 +1,6 @@
 #include "ShootingGame.h"
 
-EnemyBullet::EnemyBullet(float px , float py) : Sprite("","",true,px,py)
+EnemyBullet::EnemyBullet(float px , float py) : Sprite("Àû±âÃÑ¾Ë","",true,px,py)
 {
 	this->speed = 300;
 
