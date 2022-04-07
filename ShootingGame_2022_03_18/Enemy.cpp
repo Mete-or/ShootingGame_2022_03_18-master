@@ -150,6 +150,10 @@ void Enemy::OnTriggerStay2D(GameObject* other)
 			Instantiate(new EnemyExp(px-18,py-90));
 			//적기 제거
 			Destroy(this);
+
+			//적기 제거 카운트하기
+			EnemySpawner* spawner = EnemySpawner::Instance();
+			spawner->AddDestroy();
 		}
 
 

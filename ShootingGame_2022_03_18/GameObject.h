@@ -35,6 +35,7 @@ public:
 
 	float GetPx();
 	float GetPy();
+	void GetPosition(float& px, float& py);
 
 	void SetTag(string tag);
 	void SetName(string name);
@@ -53,7 +54,7 @@ public:
 	void Translate(float x, float y);
 
 	//충돌 박스 기즈모 그리기 함수
-	void OnDrawGizmos();
+	virtual void OnDrawGizmos();
 
 	//게임오브젝트 추가/삭제하기//
 	void Instantiate(GameObject* obj);

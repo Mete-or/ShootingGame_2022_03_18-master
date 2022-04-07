@@ -5,7 +5,7 @@ Animation::Animation(string tag, string name, bool active, float px, float py)
 {
 	this->index = 0;
 	this->animTimer = 0;
-	this->animDelay = 0.007;
+	this->animDelay = 0.07;
 	this->animId = 0;
 }
 void Animation::AddSprite(const char* fileName, int x, int y, int width, int height,int id)

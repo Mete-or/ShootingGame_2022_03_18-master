@@ -155,6 +155,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyBullet.h" />
     <ClInclude Include="EnemyExp.h" />
+    <ClInclude Include="EnemySpawner.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameBG.h" />
     <ClInclude Include="GameObject.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="LaserExp.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerExp.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ShootingGame.h" />
@@ -180,6 +182,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyBullet.cpp" />
     <ClCompile Include="EnemyExp.cpp" />
+    <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="GameBG.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Graphic.cpp" />
@@ -188,6 +191,7 @@
     <ClCompile Include="LaserExp.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerExp.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="ShootingGame.cpp" />
     <ClCompile Include="Sprite.cpp" />

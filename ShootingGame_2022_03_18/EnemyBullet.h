@@ -5,6 +5,7 @@ class EnemyBullet : public Sprite
 {
 private:
 	float speed;
+	float lifeTime;
 
 public:
 	EnemyBullet(float px , float py);

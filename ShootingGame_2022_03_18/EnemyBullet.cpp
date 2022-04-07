@@ -4,6 +4,7 @@ EnemyBullet::EnemyBullet(float px , float py) : Sprite("적기총알","",true,px,py)
 {
 	this->speed = 300;
 
+	this->lifeTime = 5;
 
 }
 
@@ -21,5 +22,16 @@ void EnemyBullet::Start()
 
 void EnemyBullet::Update()
 {
+
 	Translate(0, speed * Time::deltaTime);
+
+	
+	lifeTime -= Time::deltaTime;
+
+	if (lifeTime <= 0)
+	{
+		//레이저 객체 삭제
+
+		Destroy(this);
+	}
 }

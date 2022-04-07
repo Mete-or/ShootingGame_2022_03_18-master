@@ -2,13 +2,16 @@
 
 Player::Player(float px, float py) : GameObject("플레이어","", true, px, py)
 {
-	this->speed = 250;  //이동스피드
-	this->fireTimer = 0  ; //발사타이머 측정 변수
-	this->fireDelay = 0.2; //발사지연 세팅 변수
-	this->index = 3;
-	this->animTimer = 0; //애니메이션 시간측정 변수
-	this->animDelay = 0.1f; // 애니메이션 지연시간 지정 변수
-	this->hp = 100;
+	this->speed = 250;			 //이동스피드
+	this->showUpspeed = 250;	 //스폰스피드
+	this->fireTimer = 0  ;		 //발사타이머 측정 변수
+	this->fireDelay = 0.2;		 //발사지연 세팅 변수
+	this->index = 3;			 //애니메이션 인덱스
+	this->animTimer = 0;		 //애니메이션 시간측정 변수
+	this->animDelay = 0.1f;		 // 애니메이션 지연시간 지정 변수
+	this->hp = 10;				 //플레이어 체력
+	this->state = State::showUp; //시작상태 초기화
+	
 }
 
 Player::~Player()
@@ -38,8 +41,22 @@ void Player::Start()
 
 void Player::Update()
 {
-	Move();
-	Fire();
+	if (state == State::showUp)
+	{
+		Translate(0, -showUpspeed * Time::deltaTime);
+
+		if (GetPy() <= HEIGHT - 200)
+		{
+			state = State::control;
+		}
+	}
+	else if (state == State::control)
+	{
+		Move();
+		Fire();
+	}
+
+
 }
 void Player::Draw()
 {
@@ -187,34 +204,44 @@ void Player::Fire()
 	}	
 }
 void Player::OnTriggerStay2D(GameObject* other)
-{
+{/*
 	string tag = other->GetTag();
-
-	if (tag == "적기총알")
-	{
-		hp = hp - 10; //적기에 피해 데미지 적용하기
-		printf("플레이어 체력 %f\n", hp);
-
-		//레이저 폭발효과
-		float px = other->GetPx();
-		float py = other->GetPy();
-
-		Instantiate(new BulletExp(px - 14, py));
-
-		Destroy(other); // 데이터 삭제하기
-
-
-		if (hp <= 0)
+	
+		if (tag == "적기총알" && state == State::control)
 		{
-			//플레이어 폭발
-			px = this->GetPx();
-			py = this->GetPy();
-			Instantiate(new BulletExp(px - 18, py - 90));
-			//적기 제거
-			Destroy(this);
+			hp = hp - 10; //적기에 피해 데미지 적용하기
+			printf("플레이어 체력 %f\n", hp);
+
+			//레이저 폭발효과
+			float px = other->GetPx();
+			float py = other->GetPy();
+
+			Instantiate(new BulletExp(px - 14, py));
+
+			Destroy(other); // 데이터 삭제하기
+
+
+			if (hp <= 0)
+			{
+				//플레이어 폭발
+				float px, py;
+
+				other->GetPosition(px, py);
+
+				Instantiate(new EnemyExp(px - 90, py - 140));
+				//플레이어 제거
+				Destroy(this);
+
+
+
+				//[임시]플레이어 리스폰하기//
+				ObjectManager::Instantiate(new Player(WIDTH / 2 - 34, HEIGHT + 100));
+
+
+			}
 		}
 
 
-	}
 	
+	*/
 }

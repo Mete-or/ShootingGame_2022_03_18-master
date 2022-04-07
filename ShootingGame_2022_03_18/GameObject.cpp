@@ -43,6 +43,11 @@ float GameObject::GetPy()
 {
 	return py;
 }
+void GameObject::GetPosition(float& px, float& py)
+{
+	px = this->px;
+	py = this->py;
+}
 bool GameObject::GetDead()
 {
 	return isDead;

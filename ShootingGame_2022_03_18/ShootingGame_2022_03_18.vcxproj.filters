@@ -84,6 +84,12 @@
     <ClInclude Include="BulletExp.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerExp.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySpawner.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Debug.cpp">
@@ -144,6 +150,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="BulletExp.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerExp.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySpawner.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

@@ -21,6 +21,8 @@
 #include "LaserExp.h"
 #include "EnemyExp.h"
 #include "BulletExp.h"
+#include "PlayerExp.h"
+#include "EnemySpawner.h"
 
 #define WIDTH          480
 #define HEIGHT         800
