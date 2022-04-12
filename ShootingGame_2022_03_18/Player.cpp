@@ -11,6 +11,7 @@ Player::Player(float px, float py) : GameObject("플레이어","", true, px, py)
 	this->animDelay = 0.1f;		 // 애니메이션 지연시간 지정 변수
 	this->hp = 10;				 //플레이어 체력
 	this->state = State::showUp; //시작상태 초기화
+	this->bulletCount = 1;
 	
 }
 
@@ -185,19 +186,22 @@ void Player::Fire()
 			//레이저 객체...생성하기//
 			Instantiate(new Laser(px + 34 - 6, py+5));
 			
+			if (bulletCount == 2)
+			{
+				/////////////레이저 두발 발사////////////////
+				//레이저 객체...생성하기//
+				Instantiate(new Laser(px + 34 - 3 - 7, py - 30));
+				Instantiate(new Laser(px + 34 - 3 + 7, py - 30));
+			}
+			else if (bulletCount == 3)
+			{
+				///////////////레이저 세발 발사//////////////
+				//레이저 객체...생성하기//
+				Instantiate(new Laser(px + 34 - 3 - 7, py - 28));
+				Instantiate(new Laser(px + 34 - 3,     py - 38));
+				Instantiate(new Laser(px + 34 - 3 + 7, py - 28));
+			}
 
-			/////////////레이저 두발 발사////////////////
-			//레이저 객체...생성하기//
-			//Instantiate(new Laser(px + 34 - 3 - 7, py - 30));
-			//Instantiate(new Laser(px + 34 - 3 + 7, py - 30));
-			
-
-			///////////////레이저 세발 발사//////////////
-			//레이저 객체...생성하기//
-			//Instantiate(new Laser(px + 34 - 3 - 7, py - 28));
-			//Instantiate(new Laser(px + 34 - 3,     py - 38));
-			//Instantiate(new Laser(px + 34 - 3 + 7, py - 28));
-			
 			//발사타이머...리셋
 			fireTimer = 0;
 		}
@@ -249,9 +253,24 @@ void Player::OnTriggerStay2D(GameObject* other)
 
 				//[임시]플레이어 리스폰하기//
 				ObjectManager::Instantiate(new Player(WIDTH / 2 - 34, HEIGHT + 100));
+				bulletCount = 0;
 
 
 			}
+		}
+		else if (tag == "총알아이템")
+		{
+			//아이템 제거
+
+			Destroy(other);
+
+			//총알(레이저) 발사갯수 증가
+			if (bulletCount < 3)
+			{
+				bulletCount++;
+			}
+			
+
 		}
 
 

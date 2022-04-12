@@ -25,6 +25,7 @@
 #include "EnemySpawner.h"
 #include "Bomb.h"
 #include "BombExp.h"
+#include "BulletItem.h"
 
 #define WIDTH          480
 #define HEIGHT         800

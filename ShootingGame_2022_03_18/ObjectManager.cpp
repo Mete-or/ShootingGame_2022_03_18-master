@@ -121,8 +121,11 @@ void ObjectManager::Draw()
 	{
 		for (int i = 0; i < gameObjects[layer].size(); i++)
 		{
-			gameObjects[layer][i]->Draw();			  //객체 그리기
-			gameObjects[layer][i]->OnDrawGizmos();   //기즈모 그리기
+			if (gameObjects[layer][i]->GetActive() == true)
+			{
+				gameObjects[layer][i]->Draw();			  //객체 그리기
+				gameObjects[layer][i]->OnDrawGizmos();   //기즈모 그리기
+			}
 		}
 	}
 }

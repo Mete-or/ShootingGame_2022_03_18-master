@@ -47,13 +47,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     ObjectManager::Instantiate(new Player      (WIDTH/2 - 34, HEIGHT+100), (2));
     ObjectManager::Instantiate(new GameBG      (0, 0),                     (0));
     ObjectManager::Instantiate(new EnemySpawner(WIDTH/2, 0              )  );
+    ObjectManager::Instantiate(new BulletItem(100, 400));
+    ObjectManager::Instantiate(new BulletItem(200, 400));
+    ObjectManager::Instantiate(new BulletItem(300, 400));
+
   
 
-    //****************애니메이션 클래스 테스트 하기****************************
-    //ObjectManager::Instantiate(new Animation("", "", true, 200, 100));
-    //ObjectManager::Instantiate(new Enemy(150,-200));
 
-    //폭탄 테스트하기
+  
  
     
 

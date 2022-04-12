@@ -32,6 +32,9 @@ private:
 
 	State state;
 
+	//총알(레이저) 발사 갯수
+	int bulletCount;
+
 public:
 	Player(float px, float py);
 	~Player();
