@@ -18,14 +18,10 @@ EnemySpawner::~EnemySpawner()
 void EnemySpawner::Start()
 {
 	//자기 자신객체 포인터를 spawner 변수에 저장함
-	if (spawner == nullptr)
-	{
+
 		spawner = this;
-	}
-	else
-	{
-		printf("파일저장실패");
-	}
+	
+
 }
 void EnemySpawner::Update()
 {
@@ -43,18 +39,29 @@ void EnemySpawner::Update()
 
 		if (spawnTimer >= spawnDelay)
 		{
-			Instantiate(new Enemy(px - 95, py - 137));
+			if (spawnCount < 10)
+			{
+				int sel = Random::Range(0, 3);
+				int offsetx[3] = { 0,-130,130 };
+				//Instantiate(new Enemy(px - 95, py - 137));//가운데 스폰
+				//Instantiate(new Enemy(px - 130 - 95, py - 137)); //왼쪽 스폰위치
+				Instantiate(new Enemy(px + offsetx[sel], py - 137)); //오른쪽 스폰위치
 
-			//타이머 리셋
-			spawnTimer = 0;
+				//타이머 리셋
+				spawnTimer = 0;
 
-			//스폰 카운트 증가
-			spawnCount++;
+				//스폰 카운트 증가
+				spawnCount++;
+			}
+			else
+			{
+				//보스스폰
+				printf("보스스폰");
+				
+			}
 		}
-		else if (spawnCount >= destroyCount)
-		{
 
-		}
+
 	}
 	 
 }

@@ -149,6 +149,8 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BMP.h" />
+    <ClInclude Include="Bomb.h" />
+    <ClInclude Include="BombExp.h" />
     <ClInclude Include="BoxCollider2D.h" />
     <ClInclude Include="BulletExp.h" />
     <ClInclude Include="Debug.h" />
@@ -176,6 +178,8 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BMP.cpp" />
+    <ClCompile Include="Bomb.cpp" />
+    <ClCompile Include="BombExp.cpp" />
     <ClCompile Include="BoxCollider2D.cpp" />
     <ClCompile Include="BulletExp.cpp" />
     <ClCompile Include="Debug.cpp" />

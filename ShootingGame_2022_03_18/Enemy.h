@@ -4,17 +4,26 @@
 
 class Enemy : public Animation
 {
-	enum State { moveDown = 0, moveLeft = 1, moveRight = 2 };
+	enum State { moveDown = 0, moveLeft = 1, moveRight = 2 , fall = 3};
 
 private:
 
 	float speed;
+	float fallspeed;
 	State state;
+
 
 	float fireTimer;
 	float fireDelay;
+	
+	float fallTimeOut;
 
 	float hp;
+
+	bool isBombExpCollided; //ÆøÅº
+	bool isPlayerExpCollided;
+
+	int downEndPos; //moveDown »óÅÂ Á¾·á ·£´ýÀ§Ä¡
 
 public:
 

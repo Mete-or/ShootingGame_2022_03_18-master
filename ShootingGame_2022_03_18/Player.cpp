@@ -202,9 +202,22 @@ void Player::Fire()
 			fireTimer = 0;
 		}
 	}	
+	
+	//ÆøÅº ¹ß»ç
+	if(Input::GetKeyDown(KeyCode::Z)==true)
+	{
+		float px = GetPx();
+		float py = GetPy();
+
+		Instantiate(new Bomb(px+15, py-15));
+
+		
+	}
 }
+
+
 void Player::OnTriggerStay2D(GameObject* other)
-{/*
+{
 	string tag = other->GetTag();
 	
 		if (tag == "Àû±âÃÑ¾Ë" && state == State::control)
@@ -243,5 +256,5 @@ void Player::OnTriggerStay2D(GameObject* other)
 
 
 	
-	*/
+	
 }

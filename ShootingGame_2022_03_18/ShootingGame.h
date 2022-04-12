@@ -23,6 +23,8 @@
 #include "BulletExp.h"
 #include "PlayerExp.h"
 #include "EnemySpawner.h"
+#include "Bomb.h"
+#include "BombExp.h"
 
 #define WIDTH          480
 #define HEIGHT         800

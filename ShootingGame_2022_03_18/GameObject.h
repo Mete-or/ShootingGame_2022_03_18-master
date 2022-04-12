@@ -57,7 +57,7 @@ public:
 	virtual void OnDrawGizmos();
 
 	//게임오브젝트 추가/삭제하기//
-	void Instantiate(GameObject* obj);
+	void Instantiate(GameObject* obj,int layer = 0);
 	void Destroy(GameObject* obj);
 
 	//충돌체 추가하기//

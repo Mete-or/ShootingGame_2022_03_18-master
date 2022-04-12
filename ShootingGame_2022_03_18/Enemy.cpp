@@ -2,14 +2,22 @@
 
 Enemy::Enemy(float px, float py) : Animation("적기", "", true, px, py)
 {
+	
 	this->speed = 100;
+	this->fallspeed = 300;
 	this->state = State::moveDown;
+
+	this->fallTimeOut = 3;
+
+
 
 	this->fireTimer = 0;
 	this->fireDelay = 0.5;
 
 	this->hp = 100;
 
+	this->isBombExpCollided = false;
+	this->isPlayerExpCollided = false;
 }
 Enemy::~Enemy()
 {
@@ -46,11 +54,18 @@ void Enemy::Start()
 	AddBoxCollider2D(65, 10, 62, 16); //꼬리 날개
 	AddBoxCollider2D(88, 26,14, 112); //가운데 몸통
 
+	//moveDown 상태 종료 위치 랜덤만들기
+	downEndPos = Random::Range(20, 150);
+
 }
 void Enemy::Update()
 {
 	Move();
 	Fire();
+
+	//중복 충돌 판단 변수 리셋
+	isBombExpCollided = false; 
+	isPlayerExpCollided = false;
 
 } 
 
@@ -63,7 +78,7 @@ void Enemy::Move()
 	{
 		Translate(0, speed * Time::deltaTime);
 
-		if (GetPy() > 25)
+		if (GetPy() > downEndPos)
 		{
 			state = State::moveLeft;
 		}
@@ -90,7 +105,27 @@ void Enemy::Move()
 		}
 	}
 	break;
+
+	case State::fall:
+	{
+		//추락 이동하기
+		Translate(0, fallspeed * Time::deltaTime);
+
+		//타임아웃 
+		fallTimeOut -= Time::deltaTime;
+		if (fallTimeOut < 0)
+		{
+			Destroy(this);
+
+			EnemySpawner* spawner = EnemySpawner::Instance();
+			
+			spawner->AddDestroy();
+			
+		}
 	}
+	break;
+	}
+	
 }
 
 void Enemy::Fire()
@@ -119,35 +154,66 @@ void Enemy::OnTriggerStay2D(GameObject* other)
 
 	if (tag == "레이저")
 	{
-		hp = hp - 10; //적기에 피해 데미지 적용하기
-		printf("적기 체력 %f\n", hp);
-
-		//레이저 폭발효과
-		float px = other->GetPx();
-		float py = other->GetPy();
-
-		Instantiate(new LaserExp(px-14, py));
-
-		Destroy(other); // 데이터 삭제하기
-
-		if (80 <= hp && hp <= 100)
+		if (isPlayerExpCollided == false)
 		{
-			Play(0);
+			isPlayerExpCollided = true;
+
+			hp = hp - 10; //적기에 피해 데미지 적용하기
+			printf("적기 체력 %f\n", hp);
+
+			//레이저 폭발효과
+			float px = other->GetPx();
+			float py = other->GetPy();
+
+			Instantiate(new LaserExp(px - 14, py));
+
+			Destroy(other); // 데이터 삭제하기
+
+			if (80 <= hp && hp <= 100)
+			{
+				Play(0);
+			}
+			else if (50 <= hp && hp < 80)
+			{
+				Play(1);
+			}
+			else if (0 <= hp && hp < 50)
+			{
+				Play(2);
+				state = State::fall; //적기 추락상태로 전이(transition)
+			}
+			else if (hp <= 0)
+			{
+				//적기 폭발
+				px = this->GetPx();
+				py = this->GetPy();
+				Instantiate(new EnemyExp(px - 18, py - 90));
+				//적기 제거
+				Destroy(this);
+
+				//적기 제거 카운트하기
+				EnemySpawner* spawner = EnemySpawner::Instance();
+				spawner->AddDestroy();
+			}
+
 		}
-		else if (50 <= hp && hp < 80)
+	}
+	else if (tag == "플레이어")
+	{
+		printf("---적기에 플레이어가 충돌함--- \n");
+	}
+	else if (tag == "폭탄폭발")
+	{
+		if (isBombExpCollided == false) // 이전에 충돌처리가 안되었을때만 
 		{
-			Play(1);
-		}
-		else if (0 <= hp && hp < 50)
-		{
-			Play(2);
-		}
-		else if (hp <= 0)
-		{
-			//적기 폭발
-			px = this->GetPx();
-			py = this->GetPy();
-			Instantiate(new EnemyExp(px-18,py-90));
+			isBombExpCollided = true; //충돌처리 했음을 표시
+
+			//적기 폭발효과
+			float px = this->GetPx();
+			float py = this->GetPy();
+			Instantiate(new EnemyExp(px - 18, py - 90));
+
+
 			//적기 제거
 			Destroy(this);
 
@@ -155,12 +221,6 @@ void Enemy::OnTriggerStay2D(GameObject* other)
 			EnemySpawner* spawner = EnemySpawner::Instance();
 			spawner->AddDestroy();
 		}
-
-
-	}
-	else if (tag == "플레이어")
-	{
-		printf("---적기에 플레이어가 충돌함--- \n");
 	}
 }
 

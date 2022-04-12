@@ -90,6 +90,12 @@
     <ClInclude Include="EnemySpawner.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="BombExp.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Debug.cpp">
@@ -156,6 +162,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="EnemySpawner.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BombExp.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
