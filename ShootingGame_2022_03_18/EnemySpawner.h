@@ -7,14 +7,20 @@ private:
 	float spawnTimer;
 	float spawnDelay;
 
-	//자기 객체 포인터를 저장하는 스태틱변수//
-	static EnemySpawner* spawner;
 
 	//적기 스폰 / 제거 카운트하기
 	int spawnCount;
 	int destroyCount;
 
+	//자기 객체 포인터를 저장하는 스태틱변수//
+	static EnemySpawner* spawner;
 
+	//총알 아이템 드롭 지정 배열//
+
+	bool dropBulletItem[20] = { false ,false ,true  ,false ,false ,
+								true  ,false ,true  ,false ,false ,
+								false ,true  ,false ,true  ,false ,
+								true  ,false ,true  ,true  ,false };
 
 public:
 	EnemySpawner(float px, float py);

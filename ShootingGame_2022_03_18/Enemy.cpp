@@ -2,11 +2,9 @@
 
 Enemy::Enemy(float px, float py) : Animation("적기", "", true, px, py)
 {
-	
-	this->speed = 100;
-	this->fallspeed = 300;
 	this->state = State::moveDown;
-
+	this->speed       = 100;
+	this->fallspeed   = 300;
 	this->fallTimeOut = 3;
 
 
@@ -16,8 +14,10 @@ Enemy::Enemy(float px, float py) : Animation("적기", "", true, px, py)
 
 	this->hp = 100;
 
-	this->isBombExpCollided = false;
+	this->isBombExpCollided   = false;
 	this->isPlayerExpCollided = false;
+
+	this->dropBulletItem      = false;
 }
 Enemy::~Enemy()
 {
@@ -68,6 +68,10 @@ void Enemy::Update()
 	isPlayerExpCollided = false;
 
 } 
+void Enemy::SetDropBulletItem(bool drop)
+{
+	dropBulletItem = drop;
+}
 
 void Enemy::Move()
 {
@@ -148,6 +152,8 @@ void Enemy::Fire()
 
 }
 
+
+
 void Enemy::OnTriggerStay2D(GameObject* other)
 {
 	string tag = other->GetTag();
@@ -194,6 +200,24 @@ void Enemy::OnTriggerStay2D(GameObject* other)
 				//적기 제거 카운트하기
 				EnemySpawner* spawner = EnemySpawner::Instance();
 				spawner->AddDestroy();
+
+				int p = Random::Range(0, 10000);
+				/*랜덤방식
+				if (p < 1000)
+				{
+					
+					//총알아이템 드롭 (레이저)
+					Instantiate(new BulletItem(px + 80, py + 40));
+				}
+				*/
+				
+				if (dropBulletItem == true)
+				{
+					Instantiate(new BulletItem(px + 80, py + 40));
+				}
+				
+
+
 			}
 
 		}
@@ -211,15 +235,18 @@ void Enemy::OnTriggerStay2D(GameObject* other)
 			//적기 폭발효과
 			float px = this->GetPx();
 			float py = this->GetPy();
-			Instantiate(new EnemyExp(px - 18, py - 90));
+			Instantiate(new EnemyExp(px - 18, py - 90),1);
 
 
-			//적기 제거
+			//적기 제거 
 			Destroy(this);
 
 			//적기 제거 카운트하기
 			EnemySpawner* spawner = EnemySpawner::Instance();
 			spawner->AddDestroy();
+
+			//총알아이템 드롭 (레이저)
+			Instantiate(new BulletItem(px + 80, py + 40));
 		}
 	}
 }

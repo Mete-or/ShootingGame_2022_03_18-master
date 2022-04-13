@@ -226,7 +226,7 @@ void Player::OnTriggerStay2D(GameObject* other)
 	
 		if (tag == "적기총알" && state == State::control)
 		{
-			hp = hp - 10; //적기에 피해 데미지 적용하기
+			//hp = hp - 10; //적기에 피해 데미지 적용하기
 			printf("플레이어 체력 %f\n", hp);
 
 			//레이저 폭발효과

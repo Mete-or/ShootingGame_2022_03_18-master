@@ -39,13 +39,30 @@ void EnemySpawner::Update()
 
 		if (spawnTimer >= spawnDelay)
 		{
-			if (spawnCount < 10)
+			if (spawnCount < 20)
 			{
 				int sel = Random::Range(0, 3);
 				int offsetx[3] = { 0,-130,130 };
 				//Instantiate(new Enemy(px - 95, py - 137));//가운데 스폰
 				//Instantiate(new Enemy(px - 130 - 95, py - 137)); //왼쪽 스폰위치
-				Instantiate(new Enemy(px + offsetx[sel], py - 137)); //오른쪽 스폰위치
+				//Instantiate(new Enemy(px + offsetx[sel], py - 137)); //오른쪽 스폰위치
+				if (dropBulletItem[spawnCount] == true)
+				{
+					Enemy* e = new Enemy(px + offsetx[sel], py - 137);
+
+					e->SetDropBulletItem(true);
+
+
+					Instantiate(e); //불릿 아이템 떨구는 적기
+				}
+				else
+				{
+					Enemy* e = new Enemy(px + offsetx[sel], py - 137);
+
+					e->SetDropBulletItem(false);
+
+					Instantiate(e); //불릿 아이템 떨구지 않는 적기
+				}
 
 				//타이머 리셋
 				spawnTimer = 0;
