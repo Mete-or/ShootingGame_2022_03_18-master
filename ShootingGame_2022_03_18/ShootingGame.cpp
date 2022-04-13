@@ -47,9 +47,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     ObjectManager::Instantiate(new Player      (WIDTH/2 - 34, HEIGHT+100), (2));
     ObjectManager::Instantiate(new GameBG      (0, 0),                     (0));
     ObjectManager::Instantiate(new EnemySpawner(WIDTH/2, 0              )  );
-    ObjectManager::Instantiate(new BulletItem(100, 400));
-    ObjectManager::Instantiate(new BulletItem(200, 400));
-    ObjectManager::Instantiate(new BulletItem(300, 400));
+    ObjectManager::Instantiate(new BulletItem(100, 200));
+    ObjectManager::Instantiate(new BulletItem(200, 200));
+    ObjectManager::Instantiate(new BulletItem(300, 200));
 
   
 

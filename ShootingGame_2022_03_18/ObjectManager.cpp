@@ -16,7 +16,11 @@ void ObjectManager::Update()
 	{
 		for (int i = 0; i < gameObjects[layer].size(); i++)
 		{
-			gameObjects[layer][i]->Update();
+			if (gameObjects[layer][i]->GetActive() == true) // 활성화된 객체만 업데이트 실행
+			{
+				gameObjects[layer][i]->Update();
+			}
+			
 		}
 	}
 }

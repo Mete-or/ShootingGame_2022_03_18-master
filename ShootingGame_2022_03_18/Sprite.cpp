@@ -6,6 +6,8 @@ Sprite::Sprite(string tag, string name, bool active, float px, float py)
 	sprite.width  = 0;
 	sprite.height = 0;
 	sprite.rgb	  = nullptr;
+
+	this->enabled = true;
 }
 
 Sprite::~Sprite()
@@ -23,9 +25,12 @@ void Sprite::SetSprite(const char* fileName)
 
 void Sprite::Draw()
 {
-	//스플라이트 그리기//
-	float px = GetPx();
-	float py = GetPy();
+	if (enabled == true)
+	{
+		//스플라이트 그리기//
+		float px = GetPx();
+		float py = GetPy();
 
-	Bitmap::DrawBMP(px, py, &sprite);
+		Bitmap::DrawBMP(px, py, &sprite);
+	}
 }
