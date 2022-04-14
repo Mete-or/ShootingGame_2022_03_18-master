@@ -1,0 +1,35 @@
+#pragma once
+#include "Sprite.h"
+
+class BombItem : public Sprite
+{
+
+	enum State { moveDown , blink };
+
+private:
+	State state;
+
+	float speed;
+
+	int moveTimeOut;
+
+	bool visible;
+
+	//±ôºýÀÓ ½Ã°£ º¯¼ö
+	float blinkTimer;
+	float blinkDelay;
+
+	//ºí¸µÅ© Å¸ÀÓ¾Æ¿ô
+	float blinkTimeOut;
+
+public:
+	BombItem(float px, float py);
+	~BombItem();
+
+	void Start();
+	void Update();
+
+
+	
+};
+

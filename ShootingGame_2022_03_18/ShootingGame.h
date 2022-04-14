@@ -26,6 +26,7 @@
 #include "Bomb.h"
 #include "BombExp.h"
 #include "BulletItem.h"
+#include "BombItem.h"
 
 #define WIDTH          480
 #define HEIGHT         800

@@ -12,6 +12,12 @@ Player::Player(float px, float py) : GameObject("플레이어","", true, px, py)
 	this->hp = 10;				 //플레이어 체력
 	this->state = State::showUp; //시작상태 초기화
 	this->bulletCount = 1;
+	this->bombCount = 3;
+
+	this->isBulletItemCollided = false;
+	this->isBombItemCollided = false;
+
+	
 	
 }
 
@@ -56,6 +62,9 @@ void Player::Update()
 		Move();
 		Fire();
 	}
+
+	isBulletItemCollided = false;
+	isBombItemCollided = false;
 
 
 }
@@ -208,13 +217,24 @@ void Player::Fire()
 	}	
 	
 	//폭탄 발사
-	if(Input::GetKeyDown(KeyCode::Z)==true)
+	if(Input::GetKeyDown(KeyCode::Z) == true)
 	{
-		float px = GetPx();
-		float py = GetPy();
+		if (bombCount > 0)
+		{
+			float px = GetPx();
+			float py = GetPy();
 
-		Instantiate(new Bomb(px+15, py-15));
+			Instantiate(new Bomb(px + 15, py - 15));
 
+			bombCount--;
+
+			printf("폭탄 갯수 감소 %d\n", bombCount);
+		}
+		else
+		{
+			printf("남은폭탄 없음");
+		}
+		
 		
 	}
 }
@@ -260,18 +280,39 @@ void Player::OnTriggerStay2D(GameObject* other)
 		}
 		else if (tag == "총알아이템")
 		{
-			//아이템 제거
-
-			Destroy(other);
-
-			//총알(레이저) 발사갯수 증가
-			if (bulletCount < 3)
+			if (isBulletItemCollided == false)
 			{
-				bulletCount++;
-			}
+				isBulletItemCollided == true;
+				//아이템 제거
+
+				Destroy(other);
+
+				//총알(레이저) 발사갯수 증가
+				if (bulletCount < 3)
+				{
+					bulletCount++;
+				}
+				
+				
 			
+			}
 
 		}
+		else if (tag == "폭탄아이템")
+		{
+			if (isBombItemCollided == false)
+			{
+				isBombItemCollided = true;
+				
+				//아이템 제거
+				Destroy(other);
+
+				bombCount++;
+
+				printf("폭탄 갯수 추가 %d\n", bombCount);
+			}
+		}
+
 
 
 	

@@ -21,6 +21,9 @@ private:
 	//이동 타임아웃
 	float moveTimeOut;
 
+	//블링크 타임아웃
+	float blinkTimeOut;
+
 public:
 	BulletItem(float px, float py);
 	~BulletItem();

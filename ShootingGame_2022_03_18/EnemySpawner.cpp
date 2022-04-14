@@ -46,11 +46,16 @@ void EnemySpawner::Update()
 				//Instantiate(new Enemy(px - 95, py - 137));//가운데 스폰
 				//Instantiate(new Enemy(px - 130 - 95, py - 137)); //왼쪽 스폰위치
 				//Instantiate(new Enemy(px + offsetx[sel], py - 137)); //오른쪽 스폰위치
+
+				/**************************************************
 				if (dropBulletItem[spawnCount] == true)
 				{
 					Enemy* e = new Enemy(px + offsetx[sel], py - 137);
+					
 
 					e->SetDropBulletItem(true);
+					
+
 
 
 					Instantiate(e); //불릿 아이템 떨구는 적기
@@ -63,6 +68,18 @@ void EnemySpawner::Update()
 
 					Instantiate(e); //불릿 아이템 떨구지 않는 적기
 				}
+				*****************************************************/
+				
+
+				Enemy* e = new Enemy(px + offsetx[sel], py - 137);
+				
+				e->SetDropBulletItem(dropBulletItem[spawnCount]);
+				e->SetDropBombItem  (dropBombItem[spawnCount]  );
+				
+
+				Instantiate(e); //불릿 , 폭탄 아이템 떨구는 적기
+			
+
 
 				//타이머 리셋
 				spawnTimer = 0;

@@ -1,30 +1,31 @@
 #include "ShootingGame.h"
 
-BulletItem::BulletItem(float px, float py) : Sprite("√—æÀæ∆¿Ã≈€", "", true, px, py)
+BombItem::BombItem(float px, float py) : Sprite("∆¯≈∫æ∆¿Ã≈€","",true,px,py)
 {
-	this->state = State::moveDown;
+	this->speed = 80;
+	this->moveTimeOut = 3;
+
+
 	this->visible = true;
+
 
 	this->blinkTimer = 0;
 	this->blinkDelay = 0.1;
-
-	this->speed = 150;
-	this->moveTimeOut = 3;
-
 	this->blinkTimeOut = 10;
 
 }
-BulletItem::~BulletItem()
+BombItem::~BombItem()
+
 {
 
 }
 
-void BulletItem::Start()
+void BombItem::Start()
 {
-	SetSprite("Asset/√—æÀæ∆¿Ã≈€.bmp");
-	AddBoxCollider2D(0, 0, 23, 80);
+	SetSprite("Asset/∆¯≈∫æ∆¿Ã≈€.bmp");
+	AddBoxCollider2D(0, 0, 22, 40);
 }
-void BulletItem::Update()
+void BombItem::Update()
 {
 	if (state == State::moveDown)
 	{
@@ -71,7 +72,7 @@ void BulletItem::Update()
 		}
 		break;
 		}
-		
+
 		blinkTimeOut -= Time::deltaTime;
 
 		if (blinkTimeOut < 0)
@@ -80,12 +81,11 @@ void BulletItem::Update()
 
 			blinkTimeOut = 10;
 		}
-		
-
-
-		///±Ù∫˝¿” ≈∏¿”æ∆øÙ √¯¡§///
-		
 	}
 
-
+	//»≠∏È «œ¥‹ø°º≠ ¡¶∞≈«œ±‚//
+	if (GetPy() >= HEIGHT)
+	{
+		Destroy(this);
+	}
 }

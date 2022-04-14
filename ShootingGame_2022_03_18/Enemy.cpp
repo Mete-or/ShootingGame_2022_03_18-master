@@ -64,13 +64,55 @@ void Enemy::Update()
 	Fire();
 
 	//중복 충돌 판단 변수 리셋
-	isBombExpCollided = false; 
+	isBombExpCollided   = false; 
 	isPlayerExpCollided = false;
 
 } 
 void Enemy::SetDropBulletItem(bool drop)
 {
 	dropBulletItem = drop;
+}
+void Enemy::SetDropBombItem(bool drop)
+{
+	dropBombItem = drop;
+}
+void Enemy::Explosion()
+{
+	//적기 폭발
+	float px = this->GetPx();
+	float py = this->GetPy();
+	Instantiate(new EnemyExp(px - 18, py - 90));
+	//적기 제거
+	Destroy(this);
+
+	//적기 제거 카운트하기
+	EnemySpawner* spawner = EnemySpawner::Instance();
+	spawner->AddDestroy();
+	/*
+	int p = Random::Range(0, 10000);
+	 랜덤방식
+	if (p < 1000)
+	{
+
+		//총알아이템 드롭 (레이저)
+		Instantiate(new BulletItem(px + 80, py + 40));
+	}
+	*/
+
+	if(dropBulletItem == true)
+	{
+		Instantiate(new BulletItem(px + 80, py + 40));
+	}
+	else if (dropBombItem == true)
+	{
+		//폭탄 아이템 드롭
+		Instantiate(new BombItem(px + (190 - 22) / 2, py + (137 - 40) / 2));
+	}
+
+	
+	
+	
+
 }
 
 void Enemy::Move()
@@ -190,34 +232,7 @@ void Enemy::OnTriggerStay2D(GameObject* other)
 			}
 			else if (hp <= 0)
 			{
-				//적기 폭발
-				px = this->GetPx();
-				py = this->GetPy();
-				Instantiate(new EnemyExp(px - 18, py - 90));
-				//적기 제거
-				Destroy(this);
-
-				//적기 제거 카운트하기
-				EnemySpawner* spawner = EnemySpawner::Instance();
-				spawner->AddDestroy();
-
-				int p = Random::Range(0, 10000);
-				/*랜덤방식
-				if (p < 1000)
-				{
-					
-					//총알아이템 드롭 (레이저)
-					Instantiate(new BulletItem(px + 80, py + 40));
-				}
-				*/
-				
-				if (dropBulletItem == true)
-				{
-					Instantiate(new BulletItem(px + 80, py + 40));
-				}
-				
-
-
+				Explosion();
 			}
 
 		}
@@ -233,20 +248,8 @@ void Enemy::OnTriggerStay2D(GameObject* other)
 			isBombExpCollided = true; //충돌처리 했음을 표시
 
 			//적기 폭발효과
-			float px = this->GetPx();
-			float py = this->GetPy();
-			Instantiate(new EnemyExp(px - 18, py - 90),1);
+			Explosion();
 
-
-			//적기 제거 
-			Destroy(this);
-
-			//적기 제거 카운트하기
-			EnemySpawner* spawner = EnemySpawner::Instance();
-			spawner->AddDestroy();
-
-			//총알아이템 드롭 (레이저)
-			Instantiate(new BulletItem(px + 80, py + 40));
 		}
 	}
 }

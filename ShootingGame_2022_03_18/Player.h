@@ -35,6 +35,12 @@ private:
 	//총알(레이저) 발사 갯수
 	int bulletCount;
 
+	int bombCount;
+
+	//총알(레이저) 아이템 충돌 확인
+	bool isBulletItemCollided;
+	bool isBombItemCollided;
+
 public:
 	Player(float px, float py);
 	~Player();

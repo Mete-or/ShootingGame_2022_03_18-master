@@ -22,6 +22,11 @@ private:
 								false ,true  ,false ,true  ,false ,
 								true  ,false ,true  ,true  ,false };
 
+	bool dropBombItem[20] = {   false ,false ,false ,false ,true ,
+								false ,false ,false ,false ,true ,
+								false ,false ,false ,false ,true ,
+								true  ,false ,true  ,true  ,false };
+
 public:
 	EnemySpawner(float px, float py);
 	~EnemySpawner();

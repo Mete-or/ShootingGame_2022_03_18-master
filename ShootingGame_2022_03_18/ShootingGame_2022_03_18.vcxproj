@@ -151,6 +151,7 @@
     <ClInclude Include="BMP.h" />
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="BombExp.h" />
+    <ClInclude Include="BombItem.h" />
     <ClInclude Include="BoxCollider2D.h" />
     <ClInclude Include="BulletExp.h" />
     <ClInclude Include="BulletItem.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="BMP.cpp" />
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="BombExp.cpp" />
+    <ClCompile Include="BombItem.cpp" />
     <ClCompile Include="BoxCollider2D.cpp" />
     <ClCompile Include="BulletExp.cpp" />
     <ClCompile Include="BulletItem.cpp" />
